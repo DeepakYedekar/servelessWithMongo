@@ -1,0 +1,50 @@
+service: hello-world
+
+
+provider:
+   name: aws
+   runtime: nodejs14.x
+   region: us-east-1
+
+
+functions: 
+  create:
+    handler: handler.create
+    events:
+      - http:
+          path: /api/create
+          method: post
+          cors: true
+  getOne:
+    handler: handler.getOne
+    events:
+      - http:
+          path: /api/getOne/{id} 
+          method: get
+          cors: true
+  getAll:
+    handler: handler.getAll 
+    events:
+     - http:
+         path: /api/getAll
+         method: get
+         cors: true
+  update:
+    handler: handler.update 
+    events:
+     - http:
+         path: api/update/{id}
+         method: put
+         cors: true
+  delete:
+    handler: handler.delete
+    events:
+     - http:
+         path: api/delete/{id} 
+         method: delete
+         cors: true
+
+
+
+plugins:
+  - serverless-offline

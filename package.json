@@ -4,16 +4,19 @@
   "description": "",
   "main": "db.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./test/handler.test.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Deepak",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.3.6",
     "dotenv": "^16.0.3",
+    "mock-lambda-context": "^0.0.1",
     "mongoose": "^6.6.5"
   },
   "devDependencies": {
+    "serverless-mocha-plugin": "^1.12.0",
     "serverless-offline": "^8.8.1"
   }
 }

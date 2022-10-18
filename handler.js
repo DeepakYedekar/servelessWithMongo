@@ -5,13 +5,13 @@ const Note = require('./model/Note');
 const connectToDatabase = async() => {
  await mongoose.connect(process.env.DB);
 }
-module.exports.create = (event, context, callback) => {
+module.exports.create = (event,context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
-
+  
   connectToDatabase()
     .then(() => {
-      Note.create(JSON.parse(event.body))
-        .then(note => callback(null, {
+      Note.create(event.body)
+        .then(note => callback(null,{
           statusCode: 200,
           body: JSON.stringify(note)
         }))
@@ -35,7 +35,7 @@ module.exports.getOne = (event, context, callback) => {
         }))
         .catch(err => callback(null, {
           statusCode: err.statusCode || 500,
-          headers: { 'Content-Type': 'text/plain' },
+          headers: { 'Content   -Type': 'text/plain' },
           body: 'Could not fetch the note.'
         }));
     });
@@ -64,7 +64,7 @@ module.exports.update = (event, context, callback) => {
 
   connectToDatabase()
     .then(() => {
-      Note.findByIdAndUpdate(event.pathParameters.id, JSON.parse(event.body), { new: true })
+      Note.findByIdAndUpdate(event.pathParameters.id, event.body, { new: true })
         .then(note => callback(null, {
           statusCode: 200,
           body: JSON.stringify(note)

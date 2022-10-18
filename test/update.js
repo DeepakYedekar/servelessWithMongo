@@ -31,3 +31,93 @@ describe('update', () => {
       expect(result.body).not.to.be.empty;
   });
 });
+
+
+describe('update without id', () => {
+  before((done) => {
+    done();
+  });
+ let body = {
+         title: "This is new Title",
+     description: "this is new Des"
+ }
+
+  let pathParameters = {
+  }
+  it('implement tests here', async () => {
+    const result = await wrapped.run({
+      pathParameters,
+      body
+    });
+    expect(result).to.not.be.empty;
+         expect(result).to.be.instanceof(Object);
+      expect(result).to.have.property('statusCode', 500);
+  });
+});
+
+describe('update without title', () => {
+  before((done) => {
+    done();
+  });
+ let body = {
+     description: "this is new Des"
+ }
+
+    let pathParameters = {
+      id:'sdfsgsrgrhdggergsdgsd'
+  }
+  it('implement tests here', async () => {
+    const result = await wrapped.run({
+      pathParameters,
+      body
+    });
+    expect(result).to.not.be.empty;
+         expect(result).to.be.instanceof(Object);
+      expect(result).to.have.property('statusCode', 500);
+  });
+});
+
+describe('update without description', () => {
+  before((done) => {
+    done();
+  });
+ let body = {
+         title: "This is new Title"
+ }
+
+    let pathParameters = {
+      id:'sdsggsrgegsdtstrwefs'
+  }
+  it('implement tests here', async () => {
+    const result = await wrapped.run({
+      pathParameters,
+      body
+    });
+    expect(result).to.not.be.empty;
+         expect(result).to.be.instanceof(Object);
+      expect(result).to.have.property('statusCode', 500);
+  });
+});
+
+
+
+describe('update without body', () => {
+  before((done) => {
+    done();
+  });
+ let body = {
+ }
+
+    let pathParameters = {
+      id:'sdsggsrgegsdtstrwefs'
+  }
+  it('implement tests here', async () => {
+    const result = await wrapped.run({
+      pathParameters,
+      body
+    });
+    expect(result).to.not.be.empty;
+         expect(result).to.be.instanceof(Object);
+      expect(result).to.have.property('statusCode', 500);
+  });
+});

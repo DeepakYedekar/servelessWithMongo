@@ -7,7 +7,11 @@ const connectToDatabase = async() => {
 }
 module.exports.create = (event,context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
-  
+  if (!event.body.title || !event.body.description) {
+    return callback(null, {
+      statusCode: 400
+    })
+  }
   connectToDatabase()
     .then(() => {
       Note.create(event.body)
@@ -25,7 +29,11 @@ module.exports.create = (event,context, callback) => {
 
 module.exports.getOne = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
-
+  if (!event.pathParameters.id) {
+    return callback(null, {
+    statusCode:500
+  })
+}
   connectToDatabase()
     .then(() => {
       Note.findById(event.pathParameters.id)
@@ -61,7 +69,11 @@ module.exports.getAll = (event, context, callback) => {
 
 module.exports.update = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
-
+if (!event.body.title || !event.body.description || !event.pathParameters.id) {
+    return callback(null, {
+      statusCode: 500
+  })
+}
   connectToDatabase()
     .then(() => {
       Note.findByIdAndUpdate(event.pathParameters.id, event.body, { new: true })
@@ -79,7 +91,11 @@ module.exports.update = (event, context, callback) => {
 
 module.exports.delete = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
-
+  if (!event.pathParameters.body) {
+    return callback(null, {
+    statusCode:500
+  })
+}
   connectToDatabase()
     .then(() => {
       Note.findByIdAndRemove(event.pathParameters.id)

@@ -24,3 +24,34 @@ describe('getOne', () => {
       expect(result.body).not.to.be.empty;
   });
 });
+
+describe('getOne with wrong id', () => {
+  before((done) => {
+    done();
+  });
+  let pathParameters = {
+   "id":"634dd1979e76ad47905db8745"
+  }
+  it('implement tests here', async () => {
+    const result = await wrapped.run({
+      pathParameters
+    });
+      expect(result).to.be.instanceof(Object);
+      expect(result).to.have.property('statusCode', 500);
+  });
+});
+
+describe('getOne without passing id', () => {
+  before((done) => {
+    done();
+  });
+  let pathParameters = {
+  }
+  it('implement tests here', async () => {
+    const result = await wrapped.run({
+      pathParameters
+    });
+      expect(result).to.be.instanceof(Object);
+      expect(result).to.have.property('statusCode', 500);
+  });
+});

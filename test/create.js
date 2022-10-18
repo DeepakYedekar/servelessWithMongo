@@ -10,8 +10,8 @@ let wrapped = mochaPlugin.getWrapper('create', '/handler.js', 'create');
 describe('create', () => {
     it('create',()=>{
  let body = {
-         title: "This is title",
-     description: "this is desc"
+         title: "This is a title",
+     description: "this is a des"
   }
   return wrapped.run({
     body
@@ -26,5 +26,47 @@ describe('create', () => {
 })
 
 
+describe('create without title', () => {
+    it('create',()=>{
+ let body = {
+     description: "this is desc"
+  }
+  return wrapped.run({
+    body
+  }).then(result => {
+      expect(result).to.not.be.empty;
+      expect(result).to.be.instanceof(Object);
+      expect(result).to.have.property('statusCode', 400);
+  })  
+    })
+})
 
 
+describe('create without description', () => {
+    it('create',()=>{
+ let body = {
+    title:"this is title"
+  }
+  return wrapped.run({
+    body
+  }).then(result => {
+      expect(result).to.not.be.empty;
+      expect(result).to.be.instanceof(Object);
+      expect(result).to.have.property('statusCode', 400);
+  })  
+    })
+})
+
+describe('create without body', () => {
+    it('create',()=>{
+ let body = {
+  }
+  return wrapped.run({
+    body
+  }).then(result => {
+      expect(result).to.not.be.empty;
+      expect(result).to.be.instanceof(Object);
+      expect(result).to.have.property('statusCode', 400);
+  })  
+    })
+})

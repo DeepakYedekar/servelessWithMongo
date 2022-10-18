@@ -7,7 +7,7 @@ const mochaPlugin = require('serverless-mocha-plugin');
 const expect = mochaPlugin.chai.expect;
 let wrapped = mochaPlugin.getWrapper('getAll', '/handler.js', 'getAll');
 
-describe('getAll', () => {
+describe('getAll if data is present', () => {
   before((done) => {
     done();
   });
@@ -19,6 +19,21 @@ describe('getAll', () => {
       expect(result).to.have.property('statusCode', 200);
       expect(result).to.have.property('body');
       expect(result.body).not.to.be.empty;
+     })
+  });
+});
+
+
+xdescribe('if data is not present', () => {
+  before((done) => {
+    done();
+  });
+
+    xit('implement tests here', () => {
+      return wrapped.run({}).then(result => {
+      expect(result).to.not.be.empty;
+      expect(result).to.be.instanceof(Object);
+      expect(result).to.have.property('statusCode', 500);
      })
   });
 });
